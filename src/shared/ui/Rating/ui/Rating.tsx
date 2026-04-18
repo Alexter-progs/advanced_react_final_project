@@ -1,4 +1,4 @@
-import { ReactComponent as Star } from '../../../assets/icons/star.svg';
+import { ReactComponent as Star } from '~static/icons/star.svg';
 
 type TRating = {
 	rating?: number;

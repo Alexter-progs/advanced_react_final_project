@@ -1,6 +1,5 @@
-import s from './LikeButton.module.css';
-import { ReactComponent as LikeSvg } from './../../../assets/icons/like.svg';
 import classNames from 'classnames';
+import { toast } from 'react-toastify';
 import { useAppSelector } from '../../../store/utils';
 import { userSelectors } from '../../../store/slices/user';
 import {
@@ -8,7 +7,8 @@ import {
 	useDeleteLikeProductMutation,
 	IErrorResponse,
 } from '../../../store/api/productsApi';
-import { toast } from 'react-toastify';
+import s from './LikeButton.module.css';
+import { ReactComponent as LikeSvg } from '~static/icons/like.svg';
 
 type TLikeButtonProps = {
 	product: Product;

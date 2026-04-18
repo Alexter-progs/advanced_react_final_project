@@ -1,15 +1,18 @@
 import classNames from 'classnames';
-import s from './Header.module.css';
-import { Logo } from '../../../shared/ui/Logo';
-import { Search } from '../../../shared/ui/Search/ui/Search';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../shared/store/utils';
-import { userSelectors } from '../../../shared/store/slices/user';
-import { isLiked } from '../../../shared/utils';
-import { useProducts } from '../../../shared/store/hooks/useProducts';
-import { cartSelectors } from '../../../shared/store/slices/cart';
+import { memo } from 'react';
+import s from './Header.module.css';
+import { Logo } from '~shared/ui/Logo';
+import { Search } from '~shared/ui/Search';
+import {
+	useAppSelector,
+	userSelectors,
+	useProducts,
+	cartSelectors,
+} from '~shared/store';
+import { isLiked } from '~shared/utils';
 
-export const Header = () => {
+export const Header = memo(() => {
 	const { products } = useProducts();
 	const user = useAppSelector(userSelectors.getUser);
 	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
@@ -80,4 +83,6 @@ export const Header = () => {
 			</div>
 		</header>
 	);
-};
+});
+
+Header.displayName = 'Header';

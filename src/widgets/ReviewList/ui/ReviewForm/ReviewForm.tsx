@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import classNames from 'classnames';
 import s from './ReviewForm.module.css';
-import { Rating } from '../../../../shared/ui/Rating';
+import { Rating } from '~shared/ui/Rating';
 
 export const ReviewForm = () => {
 	const [reviewText, setReviewText] = useState('');
@@ -11,7 +11,8 @@ export const ReviewForm = () => {
 		setReviewText(e.target.value);
 	};
 
-	const handleClick = () => {
+	const handleClick = (e: React.MouseEvent) => {
+		e.preventDefault();
 		console.log('Отправка: ', { reviewText, rating });
 	};
 
