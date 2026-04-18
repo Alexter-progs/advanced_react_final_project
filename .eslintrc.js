@@ -1,14 +1,28 @@
 module.exports = {
 	parser: '@typescript-eslint/parser',
+	root: true,
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 'latest',
 		sourceType: 'module',
 		warnOnUnsupportedTypeScriptVersion: false,
+		project: './tsconfig.json',
+		tsconfigRootDir: './',
 	},
+	plugins: ["boundaries", "@typescript-eslint", "import"],
 	settings: {
+		'import/resolver': {
+			typescript: {}
+		},
 		react: {
 			version: 'detect',
 		},
+		'boundaries/elements': [
+			{ type: 'pages', pattern: 'pages/*' },
+			{ type: 'widgets', pattern: 'widgets/*' },
+			{ type: 'features', pattern: 'features/*' },
+			{ type: 'entities', pattern: 'entities/*' },
+			{ type: 'shared', pattern: 'shared/*' },
+		],
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
@@ -21,6 +35,7 @@ module.exports = {
 		'plugin:import/typescript',
 		'plugin:jsx-a11y/recommended',
 		'plugin:eslint-comments/recommended',
+		"plugin:boundaries/recommended"
 	],
 	rules: {
 		semi: [2, 'always'],
@@ -32,5 +47,63 @@ module.exports = {
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'import/order': [
+			'error',
+			{
+				pathGroups: [
+					{ pattern: 'react', group: 'builtin' },
+					{ pattern: '~shared/**', group: 'internal' },
+					{ pattern: '~entities/**', group: 'internal' },
+					{ pattern: '~features/**', group: 'internal' },
+					{ pattern: '~widgets/**', group: 'internal' },
+					{ pattern: '~pages/**', group: 'internal' },
+				],
+			},
+		],
+		'no-restricted-imports': [
+			'error',
+			{
+				patterns: [
+					{
+						group: [
+							'~shared/*/*/**',
+							'~entities/*/**',
+							'~features/*/**',
+							'~widgets/*/**',
+							'~pages/*/**',
+							'~app/**',
+						],
+						message: 'Direct access to private modules is restricted',
+					},
+					{
+						group: [
+							'../**/shared',
+							'../**/entities',
+							'../**/features',
+							'../**/widgets',
+							'../**/pages',
+							'../**/app',
+						],
+						message: 'Prefer absolute imports instead of relatives',
+					},
+				],
+			},
+		],
+		'boundaries/element-types': [
+			2,
+			{
+				default: 'disallow',
+				rules: [
+					{
+						from: 'pages',
+						allow: ['widgets', 'features', 'entities', 'shared'],
+					},
+					{ from: 'widgets', allow: ['features', 'entities', 'shared'] },
+					{ from: 'features', allow: ['entities', 'shared'] },
+					{ from: 'entities', allow: ['shared'] },
+					{ from: 'shared', allow: ['shared'] },
+				],
+			},
+		],
 	},
 };
