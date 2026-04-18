@@ -70,6 +70,7 @@ module.exports = {
 		],
 	},
 	resolve: {
+		tsconfig: path.resolve(__dirname, '..', './tsconfig.json'),
 		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
 	},
 	plugins: [
