@@ -21,7 +21,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "cssnano": "^6.0.1",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-boundaries": "^6.0.2",
@@ -32,7 +31,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.1",
-    "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "merge": "^2.1.1",
     "mini-css-extract-plugin": "^2.7.6",
@@ -58,9 +56,7 @@
     "stylelint:fix": "stylelint \"src/**/*.css\" --fix",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path ./.prettierignore",
-    "test": "npm run stylelint:fix && npm run lint && npm run format",
-    "prepare": "husky install",
-    "commit": "npm test && cz"
+    "test": "npm run stylelint:fix && npm run lint && npm run format"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -84,11 +80,6 @@
     "*.{css,scss}": "npm stylelint:fix",
     "*.{js,jsx,ts,tsx}": "npm lint",
     "*.{js,jsx,ts,tsx,json,css,scss,md}": "npm format"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "homepage": "./"
 }
