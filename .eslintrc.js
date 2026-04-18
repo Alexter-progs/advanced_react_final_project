@@ -89,19 +89,24 @@ module.exports = {
 				],
 			},
 		],
-		'boundaries/element-types': [
+		'boundaries/dependencies': [
 			2,
 			{
 				default: 'disallow',
 				rules: [
 					{
-						from: 'pages',
-						allow: ['widgets', 'features', 'entities', 'shared'],
+						from: {type: 'pages'},
+						allow: [
+							{to: {type: 'widgets'}},
+							{to: {type: 'features'}},
+							{to: {type: 'entities'}},
+							{to: {type: 'shared'}}
+						],
 					},
-					{ from: 'widgets', allow: ['features', 'entities', 'shared'] },
-					{ from: 'features', allow: ['entities', 'shared'] },
-					{ from: 'entities', allow: ['shared'] },
-					{ from: 'shared', allow: ['shared'] },
+					{ from: {type: 'widgets'}, allow: [{to: {type: 'features'}}, {to: {type: 'entities'}}, {to: {type: 'shared'}}] },
+					{ from: {type: 'features'}, allow: [{to: {type: 'entities'}}, {to: {type: 'shared'}}] },
+					{ from: {type: 'entities'}, allow: [{to: {type: 'shared'}}] },
+					{ from: {type: 'shared'}, allow: [{to: {type: 'shared'}}] },
 				],
 			},
 		],
