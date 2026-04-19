@@ -10,11 +10,11 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { toast } from 'react-toastify';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
 import { SignInFormValues } from '../utils/types';
 import { signInFormSchema } from '../utils/validator';
 import { useSignInMutation, userActions } from '~shared/store';
@@ -136,7 +136,7 @@ export const SignInForm: FC = () => {
 						)}
 					/>
 
-					<LoadingButton
+					<Button
 						type='submit'
 						// кнопка становится недоступной после первой валидации (если есть ошибки)
 						// или когда выполняется отправка (чтобы не дать пользователю отправить форму несколько раз)
@@ -146,8 +146,8 @@ export const SignInForm: FC = () => {
 						variant='contained'
 						sx={{ mt: 3, mb: 2 }}>
 						Sign IN
-					</LoadingButton>
-					<Box display='flex' justifyContent='center' flexGrow={1}>
+					</Button>
+					<Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
 						<Link component={RouterLink} to='/signup'>
 							SIGN UP
 						</Link>

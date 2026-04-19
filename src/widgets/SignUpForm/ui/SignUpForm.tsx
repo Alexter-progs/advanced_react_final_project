@@ -1,21 +1,21 @@
 import { FC } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {
-	Avatar,
-	Box,
-	Container,
-	Link,
-	TextField,
-	Typography,
-} from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
+
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignUpFormValues } from '../utils/types';
 import { signUpFormSchema } from '../utils/validator';
+import { SignUpFormValues } from '~shared/store/api';
 import { userActions, useSignUpMutation } from '~shared/store';
 import { getMessageFromError } from '~shared/utils';
 
@@ -129,7 +129,7 @@ export const SignUpForm: FC = () => {
 						)}
 					/>
 
-					<LoadingButton
+					<Button
 						type='submit'
 						// кнопка становится недоступной после первой валидации (если есть ошибки)
 						// или когда выполняется отправка (чтобы не дать пользователю отправить форму несколько раз)
@@ -139,8 +139,8 @@ export const SignUpForm: FC = () => {
 						variant='contained'
 						sx={{ mt: 3, mb: 2 }}>
 						Sign Up
-					</LoadingButton>
-					<Box display='flex' justifyContent='center' flexGrow={1}>
+					</Button>
+					<Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1 }}>
 						<Link component={RouterLink} to='/signin'>
 							SIGN IN
 						</Link>

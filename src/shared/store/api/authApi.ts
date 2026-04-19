@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { SignUpFormValues } from '../../../widgets/SignUpForm/utils/types';
+import { SignUpFormValues } from './types';
 import { customBaseQuery } from './config';
 
 type SignUpResponse = {
