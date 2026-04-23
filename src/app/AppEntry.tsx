@@ -6,6 +6,7 @@ import { withProviders } from './providers';
 import { Header } from '~widgets/Header';
 import { Footer } from '~widgets/Footer';
 import 'react-toastify/dist/ReactToastify.css';
+import { NewsLetter } from '~widgets/newsletter';
 
 export const AppEntry = withProviders(() => (
 	<>
@@ -19,5 +20,6 @@ export const AppEntry = withProviders(() => (
 			theme='colored'
 		/>
 		<Footer />
+		<NewsLetter />
 	</>
 ));
