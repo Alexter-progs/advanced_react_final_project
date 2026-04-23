@@ -44,7 +44,6 @@ export const NewsLetter: React.FC = ({}) => {
 	);
 
 	useEffect(() => {
-		console.log('setting timeout');
 		const timeoutId = setTimeout(() => setIsNewsLetterShown(true), 2_000);
 
 		return () => clearTimeout(timeoutId);

@@ -25,7 +25,6 @@ export const useCartProductCounter = ({
 	const onCountUpdate = useCallback(
 		(count: number) => {
 			if (isInCart) {
-				console.log('On count update. Count: ', count);
 				dispatch(cartActions.setCartProductCount({ id: product.id, count }));
 			}
 		},

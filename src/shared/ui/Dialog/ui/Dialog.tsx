@@ -18,9 +18,6 @@ export const Dialog: React.ComponentType<DialogProps> = ({
 
 	useEffect(() => {
 		function handleClickOutside(e: MouseEvent) {
-			console.log('click');
-			console.log(contentRef.current);
-			console.log(e.target);
 			if (
 				contentRef.current &&
 				!contentRef.current.contains(e.target as Node)
