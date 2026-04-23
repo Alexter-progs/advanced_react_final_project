@@ -17,7 +17,8 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import { SignInFormValues } from '../utils/types';
 import { signInFormSchema } from '../utils/validator';
-import { useSignInMutation, userActions } from '~shared/store';
+import { useSignInMutation } from '~shared/store';
+import { userActions } from '~entities/user';
 
 import { getMessageFromError } from '~shared/utils';
 

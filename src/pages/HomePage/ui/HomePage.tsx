@@ -1,10 +1,9 @@
-import { Sort } from '~features/Sort';
-import { WithProtection, WithQuery } from '~shared/store/HOCs';
-
-import { LoadMore } from '~shared/ui/LoadMore';
+import { ProductsSort } from '~features/ProductsSort';
+import { WithQuery } from '~shared/store/HOCs';
+import { WithProtection } from '~features/Auth';
+import { LoadMore } from '~features/LoadMore';
 import { CardList } from '~widgets/CardList';
-import { useProducts } from '~shared/store';
-
+import { useProducts } from '~entities/product';
 const CardListWithQuery = WithQuery(CardList);
 
 export const HomePage = WithProtection(() => {
@@ -12,7 +11,7 @@ export const HomePage = WithProtection(() => {
 
 	return (
 		<>
-			<Sort />
+			<ProductsSort />
 			<CardListWithQuery
 				title='Лакомства'
 				isLoading={isLoading}

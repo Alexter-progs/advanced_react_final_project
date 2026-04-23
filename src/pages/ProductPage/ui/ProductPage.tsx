@@ -1,28 +1,20 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import s from './ProductPage.module.css';
 import { Rating } from '~shared/ui/Rating';
 import { ButtonBack } from '~shared/ui/ButtonBack';
-import { LikeButton } from '~shared/ui/LikeButton';
+import { useGetProductQuery } from '~entities/product';
 import { ReviewList } from '~widgets/ReviewList';
-import { WithProtection } from '~shared/store/HOCs';
-import {
-	useGetProductQuery,
-	useAppSelector,
-	cartSelectors,
-} from '~shared/store';
-import { ProductCartCounter } from '~shared/ui/ProductCartCounter';
+import { WithProtection } from '~features/Auth';
+import { CartCounter } from '~features/Cart';
+import { LikeProductButton } from '~features/LikeProductButton';
 
-import { CartCounter } from '~shared/ui/CartCounter';
 import qualitySVG from '~static/icons/quality.svg';
 import truckSVG from '~static/icons/truck.svg';
+import { Price } from '~shared/ui/Price';
 
-export const ProductPage = WithProtection(() => {
-	const location = useLocation();
-	const { pathname } = location;
-	const productId = pathname.split('/').at(-1) || '';
-
-	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
+export const ProductPage = () => {
+	const { productId = '' } = useParams();
 
 	const { data: product } = useGetProductQuery({ id: productId });
 
@@ -30,9 +22,7 @@ export const ProductPage = WithProtection(() => {
 		return <></>;
 	}
 
-	const { id, name, images, description, price, discount } = product;
-
-	const isProductInCart = !!cartProducts.find((p) => p.id === id);
+	const { name, images, description, price, discount } = product;
 
 	return (
 		<>
@@ -47,22 +37,9 @@ export const ProductPage = WithProtection(() => {
 					<img src={images} alt={description} />
 				</div>
 				<div className={classNames(s['product__desc'])}>
-					<div className={classNames(s['price-big'], s['price-wrap'])}>
-						<span className={classNames(s['price_old'], s['price_left'])}>
-							{`${price} ₽`}
-						</span>
-						<span className={classNames(s['price_discount'], s['price'])}>
-							{`${price - discount} ₽`}
-						</span>
-					</div>
-
-					{isProductInCart ? (
-						<CartCounter productId={id} />
-					) : (
-						<ProductCartCounter product={product} />
-					)}
-
-					<LikeButton product={product} />
+					<Price price={price} discountPrice={discount} />
+					<CartCounter product={product} enableCountBeforeAddingToCart={true} />
+					<LikeProductButton product={product} />
 					<div className={classNames(s['product__delivery'])}>
 						<img src={truckSVG} alt='truck' />
 						<div className={classNames(s['product__right'])}>
@@ -131,4 +108,8 @@ export const ProductPage = WithProtection(() => {
 			<ReviewList product={product} />
 		</>
 	);
-});
+};
+
+ProductPage.displayName = 'ProductPage';
+
+export const ProtectedProductPage = WithProtection(ProductPage);

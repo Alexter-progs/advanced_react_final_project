@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import s from './ProfilePage.module.css';
 import { ButtonBack } from '~shared/ui/ButtonBack';
-import { WithProtection } from '~shared/store/HOCs';
+import { WithProtection } from '~features/Auth';
 
 export const ProfilePage = WithProtection(() => {
 	return (

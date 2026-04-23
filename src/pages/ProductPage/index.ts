@@ -1,1 +1,1 @@
-export { ProductPage } from './ui/ProductPage';
+export { ProtectedProductPage as ProductPage } from './ui/ProductPage';

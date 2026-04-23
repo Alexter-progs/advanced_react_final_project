@@ -1,0 +1,75 @@
+.button-count {
+	display: inline-flex;
+	align-items: center;
+	height: 48px;
+	background-color: #ffffff;
+	border: 1px solid #cfd8dc;
+	border-radius: 100px;
+}
+
+.product__btn-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.button-count__plus,
+.button-count__minus {
+	width: 40px;
+	height: 100%;
+	padding: 0;
+	font-size: 24px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.button-count__num {
+	display: inline-block;
+	width: 30px;
+	padding: 0;
+	font-weight: 700;
+	font-size: 21px;
+	line-height: 24px;
+	text-align: center;
+	border: none;
+}
+
+.button_type_primary {
+	background-color: #ffe44d;
+}
+
+.button_type_primary:hover {
+	color: #f44336;
+	background-color: #ffaa0d;
+}
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	padding: 10px 18px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 20px;
+	text-decoration: none;
+	column-gap: 8px;
+	border: 2px solid transparent;
+	border-radius: 55px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	appearance: none;
+}
+
+input[type='number'],
+input[type='number']:hover,
+input[type='number']:focus {
+	appearance: textfield;
+	appearance: none;
+}

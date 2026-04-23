@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import s from './Footer.module.css';
-import { Logo } from '~shared/ui/Logo';
+import { DogFoodLogo } from '~shared/ui/DogFoodLogo';
 import Instagram from '~static/images/instagram.svg';
 import Telegram from '~static/images/telegram.svg';
 import Viber from '~static/images/viber.svg';
@@ -13,7 +13,7 @@ export const Footer = () => {
 			<div className='container'>
 				<div className={s['footer__wrapper']}>
 					<div className={s['footer__col']}>
-						<Logo />
+						<DogFoodLogo />
 						<p className={s['footer__copyright']}>
 							© «Интернет-магазин DogFood.ru»
 						</p>

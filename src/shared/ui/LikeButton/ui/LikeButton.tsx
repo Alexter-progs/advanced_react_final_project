@@ -1,52 +1,23 @@
 import classNames from 'classnames';
-import { toast } from 'react-toastify';
-import { useAppSelector } from '../../../store/utils';
-import { userSelectors } from '../../../store/slices/user';
-import {
-	useSetLikeProductMutation,
-	useDeleteLikeProductMutation,
-	IErrorResponse,
-} from '../../../store/api/productsApi';
+import { memo } from 'react';
 import s from './LikeButton.module.css';
 import { ReactComponent as LikeSvg } from '~static/icons/like.svg';
+interface LikeButtonProps {
+	isLike: boolean;
+	onLikeToggle: () => void;
+}
+export const LikeButton: React.ComponentType<LikeButtonProps> = memo(
+	({ isLike, onLikeToggle }) => {
+		return (
+			<button
+				className={classNames(s['like'], {
+					[s['like_is-active']]: isLike,
+				})}
+				onClick={onLikeToggle}>
+				<LikeSvg />
+			</button>
+		);
+	}
+);
 
-type TLikeButtonProps = {
-	product: Product;
-};
-export const LikeButton = ({ product }: TLikeButtonProps) => {
-	const accessToken = useAppSelector(userSelectors.getAccessToken);
-	const user = useAppSelector(userSelectors.getUser);
-
-	const [setLike] = useSetLikeProductMutation();
-	const [deleteLike] = useDeleteLikeProductMutation();
-
-	const isLike = product?.likes.some((l) => l.userId === user?.id);
-
-	const toggleLike = async () => {
-		if (!accessToken) {
-			toast.warning('Вы не авторизованы');
-			return;
-		}
-		let response;
-		if (isLike) {
-			response = await deleteLike({ id: `${product.id}` });
-		} else {
-			response = await setLike({ id: `${product.id}` });
-		}
-
-		if (response.error) {
-			const error = response.error as IErrorResponse;
-			toast.error(error.data.message);
-		}
-	};
-
-	return (
-		<button
-			className={classNames(s['card__favorite'], {
-				[s['card__favorite_is-active']]: isLike,
-			})}
-			onClick={toggleLike}>
-			<LikeSvg />
-		</button>
-	);
-};
+LikeButton.displayName = 'LikeButton';

@@ -1,13 +1,14 @@
 import classNames from 'classnames';
 import s from './CartPage.module.css';
 import { CartList } from './CartList';
-import { CartAmount } from './CartAmount';
-import { cartSelectors, useAppSelector } from '~shared/store';
+import { CartCheckout } from './CartCheckout';
+import { useAppSelector } from '~shared/store';
+import { cartSelectors } from '~features/Cart';
 
 export const CartPage = () => {
-	const products = useAppSelector(cartSelectors.getCartProducts);
+	const cartSize = useAppSelector(cartSelectors.getCartSize);
 
-	if (!products.length) {
+	if (cartSize < 1) {
 		return <h1 className='header-title'>Товаров нет корзине</h1>;
 	}
 
@@ -15,10 +16,10 @@ export const CartPage = () => {
 		<div className={classNames(s['content'], s['container'])}>
 			<div className={classNames(s['content-cart'])}>
 				<div className={classNames(s['cart-title'])}>
-					<span>{products.length}</span> в корзине
+					<span>{cartSize}</span> в корзине
 				</div>
-				<CartList products={products} />
-				<CartAmount products={products} />
+				<CartList />
+				<CartCheckout />
 			</div>
 		</div>
 	);

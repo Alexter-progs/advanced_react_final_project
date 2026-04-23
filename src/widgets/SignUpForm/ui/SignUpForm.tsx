@@ -16,8 +16,9 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpFormSchema } from '../utils/validator';
 import { SignUpFormValues } from '~shared/store/api';
-import { userActions, useSignUpMutation } from '~shared/store';
+import { useSignUpMutation } from '~shared/store';
 import { getMessageFromError } from '~shared/utils';
+import { userActions } from '~entities/user';
 
 export const SignUpForm: FC = () => {
 	const dispatch = useDispatch();

@@ -1,21 +1,19 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
+import { memo } from 'react';
 import s from '../../CartPage.module.css';
 import { ReactComponent as TrashIcon } from '~static/icons/trash.svg';
-import { cartActions } from '~shared/store';
-import { CartCounter } from '~shared/ui/CartCounter';
+import { CartCounter } from '~features/Cart';
+import { Price } from '~shared/ui/Price';
 
 type CartItemProps = {
 	product: CartProduct;
+	onRemove: (productId: CartProduct['id']) => void;
 };
-export const CartItem = ({ product }: CartItemProps) => {
-	const dispatch = useDispatch();
+
+export const CartItem = memo(({ product, onRemove }: CartItemProps) => {
 	const { id, name, images, price, discount } = product;
 
-	const handleDelete = () => {
-		dispatch(cartActions.deleteCartProduct(id));
-	};
 	return (
 		<div className={classNames(s['cart-item'])}>
 			<div className={classNames(s['cart-item__desc'])}>
@@ -34,26 +32,17 @@ export const CartItem = ({ product }: CartItemProps) => {
 						</Link>
 
 						<div style={{ display: 'flex', flexDirection: 'column' }}>
-							<CartCounter productId={id} />
-
-							<div className={classNames(s['cart-item__price'])}>
-								<div className={classNames(s['price-big'], s['price-wrap'])}>
-									<span
-										className={classNames(s['price_old'], s['price_right'])}>
-										{price}
-									</span>
-									<span className={classNames(s['price_discount'], s['price'])}>
-										{price - discount}
-									</span>
-								</div>
-							</div>
+							<CartCounter product={product} />
+							<Price price={price} discountPrice={discount} />
 						</div>
 						<button className={classNames(s['cart-item__bnt-trash'])}>
-							<TrashIcon onClick={handleDelete} />
+							<TrashIcon onClick={() => onRemove(id)} />
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	);
-};
+});
+
+CartItem.displayName = 'CartItem';

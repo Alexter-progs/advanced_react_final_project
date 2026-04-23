@@ -48,9 +48,7 @@ declare global {
 		productId: string;
 	};
 
-	type Like = BaseLike & {
-		user: LikeUser;
-	};
+	type Like = BaseLike;
 
 	type ReviewUserLike = BaseLike & {
 		product: ReviewProduct;
